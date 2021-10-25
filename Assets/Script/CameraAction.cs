@@ -1,0 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraAction : MonoBehaviour
+{
+    private Transform cameraTransform { get; set; } = null;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        cameraTransform = GetComponent<Transform>();
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        DrawRay();
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            Vector3 mousePosition = Input.mousePosition;
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.farClipPlane));
+            
+            if(Physics.Raycast(cameraTransform.position, worldPosition - cameraTransform.position, out RaycastHit hit))
+            {
+                Debug.Log(hit.transform.name);
+                Tower tower = hit.transform.GetComponent<Tower>();
+                if(tower != null)
+                {
+                    tower.Upgrade();
+                }
+            }
+        }
+    }
+
+    private void DrawRay()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.farClipPlane));
+
+        Debug.DrawRay(cameraTransform.position, worldPosition - cameraTransform.position, Color.red);
+    }
+}
