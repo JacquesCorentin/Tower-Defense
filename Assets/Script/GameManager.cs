@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     private float gameTimer { get; set; } = 0;
     private const float preparationTime = 10;
 
+    public int gold { get; set; } = 10;
+
 
     private void Awake()
     {
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         switch(gameState)
     {
         case GameState.PREPARATION:
@@ -54,4 +57,12 @@ public class GameManager : MonoBehaviour
     }
 
     }
+
+    public void AddGold(int value)
+    {
+        gold += value;
+        UiManager.instance.SetGold(gold);
+    }
+
+    
 }

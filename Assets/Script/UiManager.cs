@@ -12,6 +12,11 @@ public class UiManager : MonoBehaviour
 
     private Text timerText { get { return _timerText; } }
 
+
+    public Text _goldText = null;
+
+    private Text goldText { get { return _goldText; } }
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -36,5 +41,10 @@ public class UiManager : MonoBehaviour
             timer = 0;
         }*/
         timerText.text = "Timer : " + timer.ToString("F1") + " s";
+    }
+
+    public void SetGold(int gold)
+    {
+        goldText.text = "Gold : " + gold + " Po";
     }
 }

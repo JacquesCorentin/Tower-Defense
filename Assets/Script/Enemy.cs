@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private Transform enemyTransfom { get; set; } = null;
+
     // Start is called before the first frame update
     void Start()
     {
+        enemyTransfom = GetComponent<Transform>();
         
     }
 
